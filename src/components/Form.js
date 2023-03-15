@@ -1,6 +1,16 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
+import {
+  FormContainer,
+  FormTitle,
+  FormSubmission,
+  FormSpan,
+  FormInput,
+  FormTextarea,
+  Button,
+} from "./FormStyled";
+
 export const Form = () => {
   const [message, setMessage] = useState(false);
   const formRef = useRef();
@@ -26,24 +36,30 @@ export const Form = () => {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Your Full Name"
-        name="user_name"
-        required
-      />
-      <input type="text" placeholder="Your Email" name="user_email" required />
-      <textarea
-        placeholder="Your message"
-        rows="7"
-        name="message"
-        required
-      ></textarea>
-      <button type="submit" className="btn btn-primary">
-        Send Message
-      </button>
-      {message && <span>Thanks, I'll contact you shortly.</span>}
-    </form>
+    <FormContainer>
+      <FormSubmission ref={formRef} onSubmit={handleSubmit}>
+        <FormTitle>This is submission form. </FormTitle>
+        <FormInput
+          type="text"
+          placeholder="Your full name"
+          name="user_name"
+          required
+        />
+        <FormInput
+          type="text"
+          placeholder="Your email"
+          name="user_email"
+          required
+        />
+        <FormTextarea
+          placeholder="Your message"
+          rows="7"
+          name="message"
+          required
+        ></FormTextarea>
+        <Button type="submit">Send message</Button>
+        {message && <FormSpan>Thanks, I'll contact you shortly.</FormSpan>}
+      </FormSubmission>
+    </FormContainer>
   );
 };
